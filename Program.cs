@@ -22,6 +22,12 @@ internal class Program
         filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
         // Add services to the container.
 
+        builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+        {
+            builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        }));
         builder.Services.AddControllers();
         builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
         builder.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -71,6 +77,8 @@ internal class Program
         app.UseHttpsRedirection();
 
         app.UseRouting();
+
+        app.UseCors();
 
         app.UseAuthorization();
 
