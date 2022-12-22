@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestWithASPNET.Migrations
 {
-    public partial class inicialMigration : Migration
+    public partial class inicialdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,7 +36,7 @@ namespace RestWithASPNET.Migrations
                 name: "Person",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     firstName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -49,7 +49,29 @@ namespace RestWithASPNET.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.id);
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    user_name = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    full_name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    password = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    refresh_token = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    refresh_token_expiry_time = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -64,12 +86,23 @@ namespace RestWithASPNET.Migrations
 
             migrationBuilder.InsertData(
                 table: "Person",
-                columns: new[] { "id", "address", "firstName", "gender", "lastName" },
+                columns: new[] { "Id", "address", "firstName", "gender", "lastName" },
                 values: new object[,]
                 {
                     { 1L, "Braga", "Jorge", "Male", "Rodrigues" },
                     { 2L, "Famalicao", "Sara", "Female", "Rodrigues" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "id", "full_name", "password", "refresh_token", "refresh_token_expiry_time", "user_name" },
+                values: new object[] { 1L, "Test", "24-0B-E5-18-FA-BD-27-24-DD-B6-F0-4E-EB-1D-A5-96-74-48-D7-E8-31-C0-8C-8F-A8-22-80-9F-74-C7-20-A9", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Test" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_user_name",
+                table: "Users",
+                column: "user_name",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -79,6 +112,9 @@ namespace RestWithASPNET.Migrations
 
             migrationBuilder.DropTable(
                 name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
