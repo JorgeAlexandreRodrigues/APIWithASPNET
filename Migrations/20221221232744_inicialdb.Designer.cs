@@ -11,8 +11,8 @@ using RestWithASPNET.Model.Context;
 namespace RestWithASPNET.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20221110225112_inicialMigration")]
-    partial class inicialMigration
+    [Migration("20221221232744_inicialdb")]
+    partial class inicialdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,8 +66,7 @@ namespace RestWithASPNET.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Address")
                         .HasColumnType("longtext")
@@ -105,6 +104,53 @@ namespace RestWithASPNET.Migrations
                             FirstName = "Sara",
                             Gender = "Female",
                             LastName = "Rodrigues"
+                        });
+                });
+
+            modelBuilder.Entity("RestWithASPNET.Model.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("full_name");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext")
+                        .HasColumnName("password");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("longtext")
+                        .HasColumnName("refresh_token");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("refresh_token_expiry_time");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("user_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            FullName = "Test",
+                            Password = "24-0B-E5-18-FA-BD-27-24-DD-B6-F0-4E-EB-1D-A5-96-74-48-D7-E8-31-C0-8C-8F-A8-22-80-9F-74-C7-20-A9",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserName = "Test"
                         });
                 });
 #pragma warning restore 612, 618
