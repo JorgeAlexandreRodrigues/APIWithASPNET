@@ -11,8 +11,8 @@ using RestWithASPNET.Model.Context;
 namespace RestWithASPNET.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20221221232744_inicialdb")]
-    partial class inicialdb
+    [Migration("20221224112114_inicialDB")]
+    partial class inicialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,6 +72,10 @@ namespace RestWithASPNET.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("address");
 
+                    b.Property<bool>("Enable")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("enable");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext")
                         .HasColumnName("firstName");
@@ -93,6 +97,7 @@ namespace RestWithASPNET.Migrations
                         {
                             Id = 1L,
                             Address = "Braga",
+                            Enable = true,
                             FirstName = "Jorge",
                             Gender = "Male",
                             LastName = "Rodrigues"
@@ -101,6 +106,7 @@ namespace RestWithASPNET.Migrations
                         {
                             Id = 2L,
                             Address = "Famalicao",
+                            Enable = true,
                             FirstName = "Sara",
                             Gender = "Female",
                             LastName = "Rodrigues"

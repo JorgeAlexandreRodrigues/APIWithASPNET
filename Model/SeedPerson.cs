@@ -14,7 +14,8 @@ namespace RestWithASPNET.Model
                     FirstName = "Jorge",
                     LastName = "Rodrigues",
                     Address = "Braga",
-                    Gender = "Male"
+                    Gender = "Male",
+                    Enable= true,
                 },
                 new Person
                 {
@@ -22,7 +23,8 @@ namespace RestWithASPNET.Model
                     FirstName = "Sara",
                     LastName= "Rodrigues",
                     Address = "Famalicao",
-                    Gender = "Female"
+                    Gender = "Female",
+                    Enable = true,
                 }
                 );
         }
