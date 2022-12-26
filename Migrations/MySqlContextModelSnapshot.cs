@@ -70,6 +70,10 @@ namespace RestWithASPNET.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("address");
 
+                    b.Property<bool>("Enable")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("enable");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext")
                         .HasColumnName("firstName");
@@ -91,6 +95,7 @@ namespace RestWithASPNET.Migrations
                         {
                             Id = 1L,
                             Address = "Braga",
+                            Enable = true,
                             FirstName = "Jorge",
                             Gender = "Male",
                             LastName = "Rodrigues"
@@ -99,6 +104,7 @@ namespace RestWithASPNET.Migrations
                         {
                             Id = 2L,
                             Address = "Famalicao",
+                            Enable = true,
                             FirstName = "Sara",
                             Gender = "Female",
                             LastName = "Rodrigues"

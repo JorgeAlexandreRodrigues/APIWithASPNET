@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestWithASPNET.Migrations
 {
-    public partial class inicialdb : Migration
+    public partial class inicialDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,8 @@ namespace RestWithASPNET.Migrations
                     address = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     gender = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    enable = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,11 +87,11 @@ namespace RestWithASPNET.Migrations
 
             migrationBuilder.InsertData(
                 table: "Person",
-                columns: new[] { "Id", "address", "firstName", "gender", "lastName" },
+                columns: new[] { "Id", "address", "enable", "firstName", "gender", "lastName" },
                 values: new object[,]
                 {
-                    { 1L, "Braga", "Jorge", "Male", "Rodrigues" },
-                    { 2L, "Famalicao", "Sara", "Female", "Rodrigues" }
+                    { 1L, "Braga", true, "Jorge", "Male", "Rodrigues" },
+                    { 2L, "Famalicao", true, "Sara", "Female", "Rodrigues" }
                 });
 
             migrationBuilder.InsertData(
